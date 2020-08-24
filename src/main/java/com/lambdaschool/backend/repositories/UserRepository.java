@@ -1,5 +1,6 @@
 package com.lambdaschool.backend.repositories;
 
+import com.lambdaschool.backend.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

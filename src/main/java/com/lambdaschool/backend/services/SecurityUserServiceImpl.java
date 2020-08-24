@@ -1,8 +1,9 @@
 package com.lambdaschool.backend.services;
 
-import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
-import com.lambdaschool.usermodel.models.User;
-import com.lambdaschool.usermodel.repository.UserRepository;
+
+import com.lambdaschool.backend.exceptions.ResourceNotFoundException;
+import com.lambdaschool.backend.models.User;
+import com.lambdaschool.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -38,7 +39,7 @@ public class SecurityUserServiceImpl
             throws
             ResourceNotFoundException
     {
-        User user = userrepos.findByUsername(s.toLowerCase());
+       User user = userrepos.findByUsername(s.toLowerCase());
         if (user == null)
         {
             throw new ResourceNotFoundException("Invalid username or password.");
