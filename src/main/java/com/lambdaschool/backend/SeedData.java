@@ -3,10 +3,10 @@ package com.lambdaschool.backend;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import com.lambdaschool.backend.models.Role;
-import com.lambdaschool.backend.models.User;
-import com.lambdaschool.backend.models.UserRoles;
-import com.lambdaschool.backend.models.Useremail;
+import com.lambdaschool.backend.models.*;
+import com.lambdaschool.backend.repositories.AllStrainRepo;
+import com.lambdaschool.backend.repositories.DispensaryRepo;
+import com.lambdaschool.backend.repositories.StrainRepo;
 import com.lambdaschool.backend.services.RoleService;
 import com.lambdaschool.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,15 @@ public class SeedData
     @Autowired
     UserService userService;
 
+    @Autowired
+    AllStrainRepo allStrainRepo;
+
+    @Autowired
+    DispensaryRepo dispensaryRepo;
+
+    @Autowired
+    StrainRepo strainRepo;
+
     /**
      * Generates test, seed data for our application
      * First a set of known data is seeded into our database.
@@ -51,8 +60,7 @@ public class SeedData
     @Transactional
     @Override
     public void run(String[] args) throws
-            Exception
-    {
+            Exception {
         userService.deleteAll();
         roleService.deleteAll();
         Role r1 = new Role("admin");
@@ -122,34 +130,60 @@ public class SeedData
                 .add(new UserRoles(u5, r2));
         userService.save(u5);
 
-        if (false)
-        {
-            // using JavaFaker create a bunch of regular users
-            // https://www.baeldung.com/java-faker
-            // https://www.baeldung.com/regular-expressions-java
+        //dispensary name, city, state, zipcode
+        Dispensary d1 = new Dispensary("Phenos", "Modesto", "CA", "95350");
+        Dispensary d2 = new Dispensary("Barbary Coast","San Francisco","CA","94105");
+        Dispensary d3 = new Dispensary("Urban Pharm", "Portland","OR","97203");
 
-            FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-US"),
-                    new RandomService());
-            Faker nameFaker = new Faker(new Locale("en-US"));
 
-            for (int i = 0; i < 25; i++)
-            {
-                new User();
-                User fakeUser;
 
-                fakeUser = new User(nameFaker.name()
-                        .username(),
-                        "password",
-                        nameFaker.internet()
-                                .emailAddress());
-                fakeUser.getRoles()
-                        .add(new UserRoles(fakeUser, r2));
-                fakeUser.getUseremails()
-                        .add(new Useremail(fakeUser,
-                                fakeValuesService.bothify("????##@gmail.com")));
-                userService.save(fakeUser);
-            }
-        }
+        //saving
+         dispensaryRepo.save(d1);
+         dispensaryRepo.save(d2);
+         dispensaryRepo.save(d3);
+
+
+      //popular strains by mood, name,description,from d1
+      Strain s1 = new Strain("Happy","BlackBerry Haze","Blackberry Haze offers clear, unencumbered relief that will typically leave your motivation intact.",d1);
+      Strain s2 = new Strain("Relax", "Pink Champagne", "Elevating the mind while helping sooth aches and pains throughout the body.",d1);
+      Strain s3 = new Strain("Focus","Sour Patch Kiss","Offers a melting euphoria that settles in the limbs as low-level sedation",d1);
+
+      //popular strains by mood, name,description,from d2
+      Strain s4 = new Strain("Happy","Og Jay","Gives the user a happy and relax state of mind", d2);
+      Strain s5 = new Strain("Relax","Blue Cookies","Relaxes your sore muscles and mind", d2);
+      Strain s6 = new Strain("Focus","Night Sky Og","Makes you feel alert and clear thinking",d2);
+
+      //popular strains by mood, name,description,from d3
+      Strain s7 = new Strain("Happy","James Og","Makes you laugh and enjoy life",d3);
+      Strain s8 = new Strain("Relax","Pink Og","Calms nerves and body", d3);
+      Strain s9 = new Strain("Focus","Donut Shake","Gives you the sugar focus", d3);
+
+    //saving
+
+        strainRepo.save(s1);
+        strainRepo.save(s2);
+        strainRepo.save(s3);
+        strainRepo.save(s4);
+        strainRepo.save(s5);
+        strainRepo.save(s6);
+        strainRepo.save(s7);
+        strainRepo.save(s8);
+        strainRepo.save(s9);
+        
+      //all strain data
+      AllStrain a1 = new AllStrain("Frog Og");
+      AllStrain a2 = new AllStrain("Dark Cookie");
+      AllStrain a3 = new AllStrain("Light Sky Og");
+      AllStrain a4 = new AllStrain("Cookie Monster");
+      AllStrain a5 = new AllStrain("Python Og");
+
+      //saving
+        a1 = allStrainRepo.save(a1);
+        a2 = allStrainRepo.save(a2);
+        a3 = allStrainRepo.save(a3);
+        a4 = allStrainRepo.save(a4);
+        a5 = allStrainRepo.save(a5);
+
     }
 
 }
