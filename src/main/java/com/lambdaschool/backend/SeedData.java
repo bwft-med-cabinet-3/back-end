@@ -7,7 +7,9 @@ import com.lambdaschool.backend.models.*;
 import com.lambdaschool.backend.repositories.AllStrainRepo;
 import com.lambdaschool.backend.repositories.DispensaryRepo;
 import com.lambdaschool.backend.repositories.StrainRepo;
+import com.lambdaschool.backend.services.DispensaryService;
 import com.lambdaschool.backend.services.RoleService;
+import com.lambdaschool.backend.services.StrainService;
 import com.lambdaschool.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -39,14 +41,11 @@ public class SeedData
     @Autowired
     UserService userService;
 
-    @Autowired
-    AllStrainRepo allStrainRepo;
+   @Autowired
+    DispensaryService dispensaryService;
 
-    @Autowired
-    DispensaryRepo dispensaryRepo;
-
-    @Autowired
-    StrainRepo strainRepo;
+   @Autowired
+    StrainService strainService;
 
     /**
      * Generates test, seed data for our application
@@ -138,38 +137,38 @@ public class SeedData
 
 
         //saving
-         dispensaryRepo.save(d1);
-         dispensaryRepo.save(d2);
-         dispensaryRepo.save(d3);
+         d1 = dispensaryService.save(d1);
+         d2 = dispensaryService.save(d2);
+         d3 = dispensaryService.save(d3);
 
 
       //popular strains by mood, name,description,from d1
       Strain s1 = new Strain("Happy","BlackBerry Haze","Blackberry Haze offers clear, unencumbered relief that will typically leave your motivation intact.",d1);
       Strain s2 = new Strain("Relax", "Pink Champagne", "Elevating the mind while helping sooth aches and pains throughout the body.",d1);
       Strain s3 = new Strain("Focus","Sour Patch Kiss","Offers a melting euphoria that settles in the limbs as low-level sedation",d1);
-
-      //popular strains by mood, name,description,from d2
+//
+//      //popular strains by mood, name,description,from d2
       Strain s4 = new Strain("Happy","Og Jay","Gives the user a happy and relax state of mind", d2);
-      Strain s5 = new Strain("Relax","Blue Cookies","Relaxes your sore muscles and mind", d2);
-      Strain s6 = new Strain("Focus","Night Sky Og","Makes you feel alert and clear thinking",d2);
-
-      //popular strains by mood, name,description,from d3
-      Strain s7 = new Strain("Happy","James Og","Makes you laugh and enjoy life",d3);
-      Strain s8 = new Strain("Relax","Pink Og","Calms nerves and body", d3);
-      Strain s9 = new Strain("Focus","Donut Shake","Gives you the sugar focus", d3);
+//      Strain s5 = new Strain("Relax","Blue Cookies","Relaxes your sore muscles and mind", d2);
+//      Strain s6 = new Strain("Focus","Night Sky Og","Makes you feel alert and clear thinking",d2);
+//
+//      //popular strains by mood, name,description,from d3
+//      Strain s7 = new Strain("Happy","James Og","Makes you laugh and enjoy life",d3);
+//      Strain s8 = new Strain("Relax","Pink Og","Calms nerves and body", d3);
+//      Strain s9 = new Strain("Focus","Donut Shake","Gives you the sugar focus", d3);
 
     //saving
 
-        strainRepo.save(s1);
-        strainRepo.save(s2);
-        strainRepo.save(s3);
-        strainRepo.save(s4);
-        strainRepo.save(s5);
-        strainRepo.save(s6);
-        strainRepo.save(s7);
-        strainRepo.save(s8);
-        strainRepo.save(s9);
-        
+        strainService.save(s1);
+        strainService.save(s2);
+        strainService.save(s3);
+        strainService.save(s4);
+//        strainService.save(s5);
+//        strainService.save(s6);
+//        strainService.save(s7);
+//        strainService.save(s8);
+//        strainService.save(s9);
+
       //all strain data
       AllStrain a1 = new AllStrain("Frog Og");
       AllStrain a2 = new AllStrain("Dark Cookie");
@@ -178,11 +177,11 @@ public class SeedData
       AllStrain a5 = new AllStrain("Python Og");
 
       //saving
-        a1 = allStrainRepo.save(a1);
-        a2 = allStrainRepo.save(a2);
-        a3 = allStrainRepo.save(a3);
-        a4 = allStrainRepo.save(a4);
-        a5 = allStrainRepo.save(a5);
+//        a1 = allstrainrepo.save(a1);
+//        a2 = allstrainrepo.save(a2);
+//        a3 = allstrainrepo.save(a3);
+//        a4 = allstrainrepo.save(a4);
+//        a5 = allstrainrepo.save(a5);
 
     }
 

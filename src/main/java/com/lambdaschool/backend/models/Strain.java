@@ -10,12 +10,12 @@ public class Strain {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private String strainid;
+    private long strainid;
 
     //popular strains by mood, name,description,from d2
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String mood;
-    private String name;
+    private String strainname;
     private String description;
 
     //many to one
@@ -27,9 +27,9 @@ public class Strain {
     public Strain() {
     }
 
-    public Strain(String mood, String name, String description, Dispensary dispensary) {
+    public Strain(String mood, String strainname, String description, Dispensary dispensary) {
         this.mood = mood;
-        this.name = name;
+        this.strainname = strainname;
         this.description = description;
         this.dispensary = dispensary;
     }
@@ -42,11 +42,11 @@ public class Strain {
         this.dispensary = dispensary;
     }
 
-    public String getStrainid() {
+    public long getStrainid() {
         return strainid;
     }
 
-    public void setStrainid(String strainid) {
+    public void setStrainid(long strainid) {
         this.strainid = strainid;
     }
 
@@ -58,12 +58,12 @@ public class Strain {
         this.mood = mood;
     }
 
-    public String getName() {
-        return name;
+    public String getStrainname() {
+        return strainname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStrainname(String name) {
+        this.strainname = name;
     }
 
     public String getDescription() {
@@ -73,4 +73,5 @@ public class Strain {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
